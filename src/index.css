@@ -48,6 +48,17 @@
     flex-direction: column;
     gap: 15px;
 }
+.container__table_products {
+    max-height: 300px;
+    overflow: scroll;
+}
+.mainPrint {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
 /*Table*/
 
@@ -182,12 +193,11 @@ tbody tr:hover {
 
 .inputBox__standart {
     position: relative;
-    width: auto;
 }
 
 .inputBox input,
 select {
-    width: 300px;
+    width: 250px;
     padding: 10px;
     border: 1px solid var(--black2);
     background-color: var(--white);
@@ -235,6 +245,7 @@ select {
     -moz-appearance: none;
     appearance: none;
 }
+
 .inputBox__select {
     font-size: 16px;
     position: relative;
@@ -334,7 +345,37 @@ button:hover i::after {
     background: var(--green);
     box-shadow: 0 0 20px var(--green);
 }
-.button_red:hover {
-    background: var(--red);
-    box-shadow: 0 0 20px var(--red);
+.button_blue:hover {
+    background: var(--blue);
+    box-shadow: 0 0 20px var(--blue);
+}
+
+.production {
+    z-index: 2;
+    font-size: 20px;
+}
+.production:hover {
+    color: var(--green);
+    transition: 0.5s;
+    transform: scale(1.5);
+}
+.search {
+    position: relative;
+    font-size: 20px;
+    left: -50px;
+    top: 10px;
+}
+.search:hover {
+    transition: 0.5s;
+    color: var(--green);
+}
+.save:hover {
+    font-size: large;
+    transition: 0.5s;
+    color: var(--blue);
+}
+.backBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

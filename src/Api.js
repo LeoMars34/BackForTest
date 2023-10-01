@@ -41,14 +41,56 @@ export async function getNomenclatures({ token }) {
 
     return await response.json();
 }
-export async function addWorkOeder(fornData, token) {
+export async function getCurrentProduct(id, { authToken }) {
+    let response = await fetch(
+        `http://127.0.0.1:8000/api/v1/workorders/${id}/products/`,
+        {
+            headers: {
+                AUTHORIZATION: `Token ${authToken}`,
+            },
+        }
+    );
+
+    // checkErrors(response);
+
+    return await response.json();
+}
+export async function addWorkOrder(formData, { authToken }) {
     let response = await fetch(`http://127.0.0.1:8000/api/v1/workorders/`, {
         headers: {
-            AUTHORIZATION: `Token ${token}`,
+            AUTHORIZATION: `Token ${authToken}`,
         },
-        body: fornData,
+        body: formData,
         method: 'POST',
     });
+    // checkErrors(response);
+    return await response.json();
+}
+export async function editWorkOrder(id, formData, { authToken }) {
+    let response = await fetch(
+        `http://127.0.0.1:8000/api/v1/workorders/${id}/`,
+        {
+            headers: {
+                AUTHORIZATION: `Token ${authToken}`,
+            },
+            body: formData,
+            method: 'PATCH',
+        }
+    );
+    // checkErrors(response);
+    return await response.json();
+}
+export async function addProduct(id, formData, { authToken }) {
+    let response = await fetch(
+        `http://127.0.0.1:8000/api/v1/workorders/${id}/products/`,
+        {
+            headers: {
+                AUTHORIZATION: `Token ${authToken}`,
+            },
+            body: formData,
+            method: 'POST',
+        }
+    );
     // checkErrors(response);
     return await response.json();
 }

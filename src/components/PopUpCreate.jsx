@@ -1,10 +1,10 @@
 import { Input } from './Input';
 import { Button } from './Button';
 import { Select } from './Select';
-import { addWorkOeder } from '../Api';
+import { addWorkOrder } from '../Api';
 
-export function PopUpCreate({ nomenclatures, setCreateWorkOrder, token }) {
-    function createClient() {
+export function PopUpCreate({ nomenclatures, setCreateWorkOrder, authToken }) {
+    function createNewWorkOrder() {
         let formData = new FormData();
         if (document.getElementById('createProduct').value) {
             formData.append(
@@ -31,9 +31,7 @@ export function PopUpCreate({ nomenclatures, setCreateWorkOrder, token }) {
             );
         }
 
-        addWorkOeder(formData, token).then((response) => {
-            console.log(response);
-        });
+        addWorkOrder(formData, { authToken }).then((response) => {});
     }
 
     /*Закртие popUp workOrder*/
@@ -44,6 +42,7 @@ export function PopUpCreate({ nomenclatures, setCreateWorkOrder, token }) {
             }
         }
     }
+
     return (
         <div onClick={closePopUp} className="main__container">
             <div className="container__PopUp">
@@ -51,7 +50,12 @@ export function PopUpCreate({ nomenclatures, setCreateWorkOrder, token }) {
                     <h3 style={{ borderBottom: 'thick double var(--dark)' }}>
                         Заказ-наряд №
                     </h3>
-                    <Input id="createProduct" name="Продукт" />
+
+                    <Select
+                        id="createProduct"
+                        name="Продукт"
+                        options={nomenclatures}
+                    />
                     <Input id="createNumber" name="Номер" />
 
                     <Select
@@ -60,10 +64,10 @@ export function PopUpCreate({ nomenclatures, setCreateWorkOrder, token }) {
                         options={nomenclatures}
                     />
 
-                    <Input id="createDate" type="date" name="Дата начала" />
+                    <Input id="createDate" type="date" />
 
                     <Button
-                        onClick={createClient}
+                        onClick={createNewWorkOrder}
                         style="button_green"
                         name="Создать"
                     />
