@@ -11,7 +11,7 @@ export function PopUp({
     authToken,
     currentProduct,
 }) {
-    /*Закртие popUp workOrder*/
+    /*Закртие popUp*/
     function closePopUp(e) {
         {
             if (!e.target.closest('.container__PopUp')) {
@@ -19,7 +19,7 @@ export function PopUp({
             }
         }
     }
-
+    /*Функция редактирования заказ-наряда*/
     function redactorWorkOrder() {
         let formData = new FormData();
         if (document.getElementById('editProduct').value) {
@@ -51,6 +51,7 @@ export function PopUp({
             (response) => {}
         );
     }
+    /*Функция создания продукта*/
     function newProduct() {
         let formData = new FormData();
         if (document.getElementById('addWeightProduct').value) {
@@ -82,14 +83,12 @@ export function PopUp({
                         name="Номер"
                         value={workOrder.number}
                     />
-
                     <Select
                         id="editMaterial"
                         name="Материал"
                         options={nomenclatures}
                         first={workOrder.material.name}
                     />
-
                     <Input
                         id="editDate"
                         type="date"

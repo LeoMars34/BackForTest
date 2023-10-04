@@ -1,9 +1,4 @@
-// function checkErrors(response) {
-//     if (!response.ok) {
-//         InfoPopUp(`Неизвестная ошибка № ${response.status}`, "popup__Info_red");
-//     }
-// }
-
+/*Получение токена аутентификуации*/
 export async function getToken() {
     let response = await fetch('http://127.0.0.1:8000/api/v1/api-token-auth/', {
         method: 'POST',
@@ -12,9 +7,6 @@ export async function getToken() {
             'Content-Type': 'application/json',
         },
     });
-
-    // checkErrors(response);
-
     return await response.json();
 }
 /*Получение наряд-заказов*/
@@ -24,9 +16,6 @@ export async function getWorkOrderList({ token }) {
             AUTHORIZATION: `Token ${token}`,
         },
     });
-
-    // checkErrors(response);
-
     return await response.json();
 }
 /*Получение материалов*/
@@ -36,11 +25,9 @@ export async function getNomenclatures({ token }) {
             AUTHORIZATION: `Token ${token}`,
         },
     });
-
-    // checkErrors(response);
-
     return await response.json();
 }
+/*Получение конкретного продукта*/
 export async function getCurrentProduct(id, { authToken }) {
     let response = await fetch(
         `http://127.0.0.1:8000/api/v1/workorders/${id}/products/`,
@@ -50,11 +37,9 @@ export async function getCurrentProduct(id, { authToken }) {
             },
         }
     );
-
-    // checkErrors(response);
-
     return await response.json();
 }
+/*Создание заказ наряда*/
 export async function addWorkOrder(formData, { authToken }) {
     let response = await fetch(`http://127.0.0.1:8000/api/v1/workorders/`, {
         headers: {
@@ -63,9 +48,9 @@ export async function addWorkOrder(formData, { authToken }) {
         body: formData,
         method: 'POST',
     });
-    // checkErrors(response);
     return await response.json();
 }
+/*Редактирование заказ наряда*/
 export async function editWorkOrder(id, formData, { authToken }) {
     let response = await fetch(
         `http://127.0.0.1:8000/api/v1/workorders/${id}/`,
@@ -77,9 +62,9 @@ export async function editWorkOrder(id, formData, { authToken }) {
             method: 'PATCH',
         }
     );
-    // checkErrors(response);
     return await response.json();
 }
+/*Добавление продукта*/
 export async function addProduct(id, formData, { authToken }) {
     let response = await fetch(
         `http://127.0.0.1:8000/api/v1/workorders/${id}/products/`,
@@ -91,6 +76,5 @@ export async function addProduct(id, formData, { authToken }) {
             method: 'POST',
         }
     );
-    // checkErrors(response);
     return await response.json();
 }

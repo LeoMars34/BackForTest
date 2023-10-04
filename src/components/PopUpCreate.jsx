@@ -4,6 +4,7 @@ import { Select } from './Select';
 import { addWorkOrder } from '../Api';
 
 export function PopUpCreate({ nomenclatures, setCreateWorkOrder, authToken }) {
+    /*Функция создния заказ-наряда*/
     function createNewWorkOrder() {
         let formData = new FormData();
         if (document.getElementById('createProduct').value) {
@@ -30,11 +31,10 @@ export function PopUpCreate({ nomenclatures, setCreateWorkOrder, authToken }) {
                 document.getElementById('createDate').value
             );
         }
-
         addWorkOrder(formData, { authToken }).then((response) => {});
     }
 
-    /*Закртие popUp workOrder*/
+    /*Закртие popUp*/
     function closePopUp(e) {
         {
             if (!e.target.closest('.container__PopUp')) {
@@ -63,9 +63,7 @@ export function PopUpCreate({ nomenclatures, setCreateWorkOrder, authToken }) {
                         name="Материал"
                         options={nomenclatures}
                     />
-
                     <Input id="createDate" type="date" />
-
                     <Button
                         onClick={createNewWorkOrder}
                         style="button_green"

@@ -1,25 +1,23 @@
-import { useEffect } from 'react';
 import { Button } from './Button';
 import { Input } from './Input';
 
-export function Table({ workOrderList, onClick, setCreateWorkOrder }) {
-    useEffect(() => {
-        let checkboxAll = document.getElementById('filterAll');
-        let checkboxInWork = document.getElementById('filterInWork');
-        let checkboxEnd = document.getElementById('filterEnd');
-        checkboxAll.checked = true;
-    }, []);
+export function Table({
+    filterWorkOrderList,
+    onClick,
+    setCreateWorkOrder,
+    filter,
+}) {
     function createWorkOrder() {
         setCreateWorkOrder(true);
     }
-    console.log(workOrderList);
+
     return (
         <>
             <div className="container__table">
                 <div
                     style={{ display: 'flex', gap: '20px', marginTop: '30px' }}
                 >
-                    <Input name="Поиск" />
+                    <Input onInput={filter} name="Поиск" />
 
                     <div className="search">
                         <ion-icon name="search-outline"></ion-icon>
@@ -31,9 +29,30 @@ export function Table({ workOrderList, onClick, setCreateWorkOrder }) {
                             gap: '5px',
                         }}
                     >
-                        <input id="filterAll" type="checkbox" /> Все
-                        <input id="filterInWork" type="checkbox" /> В работе
-                        <input id="filterEnd" type="checkbox" /> Завершён
+                        <input
+                            onChange={(e) => {
+                                filter(e);
+                            }}
+                            id="filterAll"
+                            type="checkbox"
+                        />{' '}
+                        Все
+                        <input
+                            onChange={(e) => {
+                                filter(e, 'not_finished');
+                            }}
+                            id="filterInWork"
+                            type="checkbox"
+                        />{' '}
+                        В работе
+                        <input
+                            onChange={(e) => {
+                                filter(e, 'is_finished');
+                            }}
+                            id="filterEnd"
+                            type="checkbox"
+                        />{' '}
+                        Завершён
                     </div>
 
                     <Button
@@ -55,7 +74,7 @@ export function Table({ workOrderList, onClick, setCreateWorkOrder }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {workOrderList.map((item) => (
+                        {filterWorkOrderList.map((item) => (
                             <tr
                                 key={item.id}
                                 onClick={() =>

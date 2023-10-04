@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export function Select({ options, name, firstValue, id, first }) {
+export function Select({ options, name, id, first }) {
     useEffect(() => {
         let inputBox__select = document.querySelectorAll('.inputBox__select');
         inputBox__select.forEach((select) => {
